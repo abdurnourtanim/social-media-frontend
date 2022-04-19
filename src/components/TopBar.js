@@ -2,6 +2,7 @@ import { Chat, Notifications, Person, Search } from "@material-ui/icons";
 import React from "react";
 import img from "../assets/person/1.jpeg";
 import "../styles/topbar.css";
+import TopBarIcon from "./TopBarIcon";
 
 const TopBar = () => {
   return (
@@ -24,18 +25,9 @@ const TopBar = () => {
           <span className="topbarLink">Timeline</span>
         </div>
         <div className="topbarIcons">
-          <div className="topbarIconItem">
-            <Person />
-            <span className="topbarIconBadge">9</span>
-          </div>
-          <div className="topbarIconItem">
-            <Chat />
-            <span className="topbarIconBadge">2</span>
-          </div>
-          <div className="topbarIconItem">
-            <Notifications />
-            <span className="topbarIconBadge">8</span>
-          </div>
+          <TopBarIcon text={9} icon={Person} />
+          <TopBarIcon text={9} icon={Chat} />
+          <TopBarIcon text={9} icon={Notifications} />
         </div>
         <img src={img} alt="profile" className="topbarImg" />
       </div>
