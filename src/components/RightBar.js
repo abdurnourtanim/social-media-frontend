@@ -7,6 +7,7 @@ import ActiveFriend from "./ActiveFriend";
 import RightBarFollowingFriend from "./RightBarFollowingFriend";
 
 const RightBar = ({ profile }) => {
+  const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   const HomeRightBar = () => {
     return (
       <>
@@ -47,13 +48,34 @@ const RightBar = ({ profile }) => {
         </div>
         <h4 className="rightbarTitle">User friends</h4>
         <div className="rightbarFollowings">
-          <RightBarFollowingFriend name="John Doe" img="assets/person/1.jpeg" />
-          <RightBarFollowingFriend name="John Doe" img="assets/person/2.jpeg" />
-          <RightBarFollowingFriend name="John Doe" img="assets/person/3.jpeg" />
-          <RightBarFollowingFriend name="John Doe" img="assets/person/4.jpeg" />
-          <RightBarFollowingFriend name="John Doe" img="assets/person/5.jpeg" />
-          <RightBarFollowingFriend name="John Doe" img="assets/person/6.jpeg" />
-          <RightBarFollowingFriend name="John Doe" img="assets/person/7.jpeg" />
+          <RightBarFollowingFriend
+            name="John Doe"
+            img={`${publicFolder + `person/1.jpeg`} `}
+          />
+          <RightBarFollowingFriend
+            name="John Doe"
+            img={`${publicFolder + `person/2.jpeg`} `}
+          />
+          <RightBarFollowingFriend
+            name="John Doe"
+            img={`${publicFolder + `person/3.jpeg`} `}
+          />
+          <RightBarFollowingFriend
+            name="John Doe"
+            img={`${publicFolder + `person/4.jpeg`} `}
+          />
+          <RightBarFollowingFriend
+            name="John Doe"
+            img={`${publicFolder + `person/5.jpeg`} `}
+          />
+          <RightBarFollowingFriend
+            name="John Doe"
+            img={`${publicFolder + `person/6.jpeg`} `}
+          />
+          <RightBarFollowingFriend
+            name="John Doe"
+            img={`${publicFolder + `person/7.jpeg`} `}
+          />
         </div>
       </>
     );

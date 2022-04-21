@@ -1,14 +1,17 @@
 import { Chat, Notifications, Person, Search } from "@material-ui/icons";
 import React from "react";
-import img from "../assets/person/1.jpeg";
+import { Link } from "react-router-dom";
 import "../styles/topbar.css";
 import TopBarIcon from "./TopBarIcon";
 
 const TopBar = () => {
+  const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
-        <span className="logo">Lamasocial</span>
+        <Link to="/" className="logo">
+          Lamasocial
+        </Link>
       </div>
       <div className="topbarCenter">
         <div className="searchbar">
@@ -29,7 +32,11 @@ const TopBar = () => {
           <TopBarIcon text={9} icon={Chat} />
           <TopBarIcon text={9} icon={Notifications} />
         </div>
-        <img src={img} alt="profile" className="topbarImg" />
+        <img
+          src={`${publicFolder + `person/1.jpeg`}`}
+          alt="profile"
+          className="topbarImg"
+        />
       </div>
     </div>
   );

@@ -1,13 +1,13 @@
 import { MoreVert } from "@material-ui/icons";
 import React, { useState } from "react";
-import img4 from "../assets/heart.png";
-import img3 from "../assets/like.png";
+import { Link } from "react-router-dom";
 import { Users } from "../fakeData";
 import "../styles/post.css";
 
 const Post = ({ post }) => {
   const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
+  const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -22,14 +22,20 @@ const Post = ({ post }) => {
             <img
               className="postProfileImg"
               src={
+                publicFolder +
                 Users.filter((user) => user.id === post.userId)[0]
                   .profilePicture
               }
               alt="profile"
             />
-            <span className="postUsername">
+            <Link
+              to={`/profile/${
+                Users.filter((user) => user.id === post.userId)[0].username
+              }`}
+              className="postUsername"
+            >
               {Users.filter((user) => user.id === post.userId)[0].username}
-            </span>
+            </Link>
             <span className="postDate">{post.date}</span>
           </div>
           <div className="postTopRight">
@@ -38,19 +44,23 @@ const Post = ({ post }) => {
         </div>
         <div className="postCenter">
           <span className="postText">{post.desc}</span>
-          <img className="postImg" src={post.photo} alt="post-img" />
+          <img
+            className="postImg"
+            src={publicFolder + post.photo}
+            alt="post-img"
+          />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
             <img
               className="likeIcon"
-              src={img3}
+              src={`${publicFolder}like.png`}
               onClick={likeHandler}
               alt="like"
             />
             <img
               className="likeIcon"
-              src={img4}
+              src={`${publicFolder}heart.png`}
               onClick={likeHandler}
               alt="love"
             />
