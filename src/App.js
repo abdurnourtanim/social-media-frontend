@@ -1,9 +1,9 @@
 import React from "react";
-import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import "./styles/App.css";
 
 function App() {
-  return <Home />;
+  return <Profile />;
 }
 
 export default App;
