@@ -10,7 +10,9 @@ import {
   WorkOutline,
 } from "@material-ui/icons";
 import React from "react";
+import { Users } from "../fakeData";
 import "../styles/sidebar.css";
+import CloseFriend from "./CloseFriend";
 import SidebarList from "./SidebarList";
 
 const Sidebar = () => {
@@ -31,9 +33,9 @@ const Sidebar = () => {
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          {/* {Users.map((u) => (
-          <CloseFriend key={u.id} user={u} />
-        ))} */}
+          {Users.map((user) => (
+            <CloseFriend key={user.id} user={user} />
+          ))}
         </ul>
       </div>
     </div>

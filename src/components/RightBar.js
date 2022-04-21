@@ -1,7 +1,9 @@
 import React from "react";
 import img2 from "../assets/ad.png";
 import img from "../assets/gift.png";
+import { Users } from "../fakeData";
 import "../styles/rightBar.css";
+import ActiveFriend from "./ActiveFriend";
 
 const RightBar = () => {
   return (
@@ -16,7 +18,9 @@ const RightBar = () => {
         <img className="rightbarAd" src={img2} alt="" />
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
-          <li className="rightbarFriend"></li>
+          {Users.map((user) => (
+            <ActiveFriend key={user.id} user={user} />
+          ))}
         </ul>
       </div>
     </div>

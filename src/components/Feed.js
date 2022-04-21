@@ -1,4 +1,5 @@
 import React from "react";
+import { Posts } from "../fakeData";
 import "../styles/Feed.css";
 import Post from "./Post";
 import Share from "./Share";
@@ -8,7 +9,9 @@ const Feed = () => {
     <div className="feed">
       <div className="feedWrapper">
         <Share />
-        <Post />
+        {Posts.map((post) => (
+          <Post key={post.id} post={post} />
+        ))}
       </div>
     </div>
   );
