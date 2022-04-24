@@ -1,13 +1,23 @@
 import { MoreVert } from "@material-ui/icons";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Users } from "../fakeData";
+import { format } from "timeago.js";
 import "../styles/post.css";
 
 const Post = ({ post }) => {
-  const [like, setLike] = useState(post.like);
+  const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
-  const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [user, setUser] = useState({});
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  useEffect(async () => {
+    const fetchUser = async () => {
+      const res = await axios.get(`users/${post.userId}`);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [post.userId]);
 
   const likeHandler = () => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -21,22 +31,13 @@ const Post = ({ post }) => {
           <div className="postTopLeft">
             <img
               className="postProfileImg"
-              src={
-                publicFolder +
-                Users.filter((user) => user.id === post.userId)[0]
-                  .profilePicture
-              }
+              src={user.profilePicture || PUBLIC_FOLDER + "person/noAvatar.png"}
               alt="profile"
             />
-            <Link
-              to={`/profile/${
-                Users.filter((user) => user.id === post.userId)[0].username
-              }`}
-              className="postUsername"
-            >
-              {Users.filter((user) => user.id === post.userId)[0].username}
+            <Link to={`/profile/${user.username}`} className="postUsername">
+              {user.username}
             </Link>
-            <span className="postDate">{post.date}</span>
+            <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
             <MoreVert />
@@ -46,7 +47,7 @@ const Post = ({ post }) => {
           <span className="postText">{post.desc}</span>
           <img
             className="postImg"
-            src={publicFolder + post.photo}
+            src={PUBLIC_FOLDER + post.img}
             alt="post-img"
           />
         </div>
@@ -54,13 +55,13 @@ const Post = ({ post }) => {
           <div className="postBottomLeft">
             <img
               className="likeIcon"
-              src={`${publicFolder}like.png`}
+              src={`${PUBLIC_FOLDER}like.png`}
               onClick={likeHandler}
               alt="like"
             />
             <img
               className="likeIcon"
-              src={`${publicFolder}heart.png`}
+              src={`${PUBLIC_FOLDER}heart.png`}
               onClick={likeHandler}
               alt="love"
             />
