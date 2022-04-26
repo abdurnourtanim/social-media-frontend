@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 import "../styles/login.css";
 
 const Login = () => {
+  const email = useRef();
+  const password = useRef();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="login">
       <div className="loginWrapper">
@@ -12,15 +20,28 @@ const Login = () => {
           </span>
         </div>
         <div className="loginRight">
-          <div className="loginBox">
-            <input placeholder="Email" className="loginInput" />
-            <input placeholder="Password" className="loginInput" />
+          <form className="loginBox" onSubmit={handleClick}>
+            <input
+              required
+              placeholder="Email"
+              type="email"
+              className="loginInput"
+              ref={email}
+            />
+            <input
+              required
+              placeholder="Password"
+              type="password"
+              minLength="6"
+              className="loginInput"
+              ref={password}
+            />
             <button className="loginButton">Log In</button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">
-              Create a New Account
+            <button type="submit" className="loginRegisterButton">
+              <Link to="/signup">Create a New Account</Link>
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
