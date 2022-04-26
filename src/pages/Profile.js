@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Feed from "../components/Feed";
 import RightBar from "../components/RightBar";
 import Sidebar from "../components/Sidebar";
@@ -9,15 +10,15 @@ import "../styles/profile.css";
 const Profile = () => {
   const [user, setUser] = useState({});
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { username } = useParams();
 
   useEffect(async () => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?username=antanim`);
+      const res = await axios.get(`/users?username=${username}`);
       setUser(res.data);
-      console.log(res.data);
     };
     fetchUser();
-  }, []);
+  }, [username]);
   return (
     <>
       <TopBar />
@@ -48,7 +49,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username="antanim" />
+            <Feed username={username} />
             <RightBar user={user} />
           </div>
         </div>
